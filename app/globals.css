@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 * {
@@ -16,11 +16,37 @@ html {
 
 body {
   min-height: 100vh;
-  background: #f8fbff;
-  color: #0a1f44;
+  background: #030712;
+  color: #f8fafc;
 }
 
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes ping-ripple {
+  0% {
+    border-color: rgba(125, 211, 252, 0.65);
+    opacity: 0.75;
+    transform: translateY(-50%) scale(0.72);
+  }
+  100% {
+    border-color: rgba(249, 168, 212, 0);
+    opacity: 0;
+    transform: translateY(-50%) scale(1.32);
+  }
+}
+
+.ping-ball {
+  transform-origin: center;
+  will-change: transform;
+}
+
+.ping-ripple {
+  animation: ping-ripple 1.8s ease-out infinite;
+}
+
+.ping-ripple-delay {
+  animation-delay: 0.55s;
 }

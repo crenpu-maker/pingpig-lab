@@ -1,53 +1,61 @@
+import Image from "next/image";
 import Link from "next/link";
-import { MascotCard } from "@/components/MascotCard";
+
+const heroButtonClass =
+  "flex h-14 w-full items-center justify-center rounded-md border border-sky-300/25 bg-court-blue px-6 text-center text-sm font-bold text-white shadow-[0_18px_45px_rgba(11,95,255,0.32)] transition hover:border-sky-200/60 hover:bg-blue-500 sm:w-56";
+
+const brandLines = ["See tactics.", "Understand spin.", "Play better."];
 
 export function HeroSection() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-24">
+    <section className="relative overflow-hidden bg-[#030712]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(11,95,255,0.22),transparent_34%),radial-gradient(circle_at_88%_20%,rgba(249,168,212,0.12),transparent_25%)]" />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 md:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] lg:px-8 lg:py-24">
         <div>
-          <p className="mb-4 inline-flex rounded-md border border-court-line bg-court-ice px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-court-blue">
+          <p className="mb-4 inline-flex rounded-md border border-sky-400/30 bg-sky-400/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-sky-200">
             PingPig Lab MVP
           </p>
-          <h1 className="max-w-3xl text-4xl font-black tracking-tight text-court-navy sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-5xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-7xl">
             Table Tennis Vision & Community
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-            用 3D 可视化理解乒乓球战术、线路与旋转，并与球友一起讨论训练问题。
+          <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
+            卓球の戦術・コース・回転を見える化し、
+練習や試合の悩みを仲間と共有できる場所。
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/vision"
-              className="rounded-md bg-court-blue px-5 py-3 text-center text-sm font-bold text-white shadow-soft transition hover:bg-blue-700"
-            >
-              进入乒乓球视觉
+            <Link href="/vision" className={heroButtonClass}>
+              卓球視覚へ
             </Link>
-            <Link
-              href="/forum"
-              className="rounded-md border border-court-line bg-white px-5 py-3 text-center text-sm font-bold text-court-navy transition hover:bg-court-ice"
-            >
-              进入论坛
+            <Link href="/forum" className={heroButtonClass}>
+              交流広場へ
             </Link>
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="rounded-lg border border-court-line bg-gradient-to-br from-court-blue via-blue-500 to-court-navy p-6 text-white shadow-soft">
-            <div className="grid aspect-[4/3] place-items-center rounded-md border border-white/25 bg-white/10">
-              <div className="text-center">
-                <div className="mx-auto mb-4 h-16 w-28 rounded-md border-4 border-white/80" />
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/80">
-                  3D Court Space
-                </p>
-              </div>
-            </div>
+        <aside className="rounded-lg border border-white/10 bg-white/[0.06] p-6 text-center shadow-[0_22px_70px_rgba(0,0,0,0.35)] backdrop-blur">
+          <div className="mx-auto grid h-44 w-44 place-items-center rounded-lg border border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(249,168,212,0.18),rgba(11,95,255,0.12)_58%,rgba(2,6,23,0.2))]">
+            <Image
+              src="/mascots/pig-blandmark.png"
+              alt="PingPig minimal pig IP icon"
+              width={160}
+              height={160}
+              className="h-32 w-32 object-contain"
+            />
           </div>
-          <MascotCard
-            variant="forum"
-            title="原创猪 IP 占位"
-            description="预留给后续 mascot/icon 图片替换，用于建立专业但有记忆点的网站识别。"
-          />
-        </div>
+          <h2 className="mt-6 text-2xl font-black tracking-tight text-white">
+            PingPig
+          </h2>
+          <div className="mt-4 grid gap-2 sm:grid-cols-3">
+            {brandLines.map((line) => (
+              <p
+                key={line}
+                className="flex min-h-11 items-center justify-center rounded-md border border-white/10 bg-black/20 px-2 text-center text-[11px] font-bold leading-4 text-slate-200"
+              >
+                {line}
+              </p>
+            ))}
+          </div>
+        </aside>
       </div>
     </section>
   );
