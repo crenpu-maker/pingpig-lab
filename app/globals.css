@@ -20,6 +20,150 @@ body {
   color: #f8fafc;
 }
 
+.font-xingkai {
+  font-family: "STXingkai", "华文行楷", "KaiTi", "楷体", "Kaiti SC", serif;
+  font-weight: 400;
+}
+
+.ink-title {
+  position: relative;
+  display: inline-block;
+  color: #f8fbff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.42));
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.65),
+    0 0 10px rgba(125, 211, 252, 0.2),
+    1px 3px 0 rgba(15, 23, 42, 0.4);
+}
+
+.ink-title::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: rgba(125, 211, 252, 0.16);
+  filter: blur(1px);
+  transform: translate(2px, 3px);
+}
+
+.ink-title::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 6%;
+  bottom: -0.12em;
+  height: 0.08em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.42), transparent);
+  filter: blur(3px);
+  opacity: 0.5;
+}
+
+.bujueyi-spin-mark {
+  display: block;
+  height: 6.8rem;
+  width: 6.8rem;
+}
+
+.bujueyi-spin-mark svg {
+  overflow: visible;
+}
+
+.bujueyi-spin-mark .mark-wash {
+  fill: rgba(255, 255, 255, 0.42);
+  stroke: rgba(15, 23, 42, 0.06);
+  stroke-width: 1;
+  filter: blur(0.2px);
+  transition: fill 450ms ease, transform 450ms ease;
+  transform-origin: center;
+}
+
+.bujueyi-spin-mark .mark-one,
+.bujueyi-spin-mark .mark-left,
+.bujueyi-spin-mark .mark-right,
+.bujueyi-spin-mark .mark-speedline {
+  fill: none;
+  stroke: url("#bujueInkStroke");
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-origin: center;
+  transition:
+    opacity 520ms ease,
+    stroke-width 520ms ease,
+    transform 520ms ease,
+    filter 520ms ease;
+}
+
+.bujueyi-spin-mark .mark-one {
+  stroke-width: 13;
+  filter: drop-shadow(0 8px 10px rgba(15, 23, 42, 0.18));
+}
+
+.bujueyi-spin-mark .mark-left,
+.bujueyi-spin-mark .mark-right {
+  stroke-width: 8.5;
+  opacity: 0.86;
+  filter: drop-shadow(0 6px 8px rgba(15, 23, 42, 0.14));
+}
+
+.bujueyi-spin-mark .mark-eye {
+  fill: none;
+  stroke: #0f172a;
+  stroke-width: 5.5;
+  transform-origin: center;
+  transition:
+    opacity 520ms ease,
+    transform 520ms ease,
+    filter 520ms ease;
+}
+
+.bujueyi-spin-mark .mark-eye circle {
+  fill: none;
+}
+
+.bujueyi-spin-mark .mark-eye circle + circle {
+  fill: #0f172a;
+  stroke: none;
+}
+
+.bujueyi-spin-mark .mark-speedline {
+  stroke: rgba(56, 189, 248, 0.72);
+  stroke-width: 2.5;
+  opacity: 0;
+  filter: blur(1.5px);
+}
+
+.bujueyi-spin-mark.is-spinning .mark-wash {
+  fill: rgba(239, 246, 255, 0.56);
+  transform: scale(1.04);
+}
+
+.bujueyi-spin-mark.is-spinning .mark-one {
+  stroke-width: 16;
+  filter: blur(0.25px) drop-shadow(0 0 9px rgba(14, 165, 233, 0.28));
+  transform: scaleX(1.18) translateY(1px);
+}
+
+.bujueyi-spin-mark.is-spinning .mark-left,
+.bujueyi-spin-mark.is-spinning .mark-right {
+  opacity: 0.12;
+  filter: blur(3px);
+  transform: scaleX(1.42) translateY(2px);
+}
+
+.bujueyi-spin-mark.is-spinning .mark-eye {
+  opacity: 0.16;
+  filter: blur(2.4px);
+  transform: scaleX(1.28);
+}
+
+.bujueyi-spin-mark.is-spinning .mark-speedline {
+  opacity: 1;
+  transform: scaleX(1.18);
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;

@@ -2,18 +2,14 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-
-const greetings = [
-  "Hello, player.",
-  "Welcome to PingPig Lab.",
-  "你好，欢迎来到 PingPig Lab。",
-  "こんにちは、PingPig Lab へ。",
-  "Hola, bienvenido.",
-  "Bonjour, bienvenue.",
-  "안녕하세요, 환영합니다.",
-];
+import {
+  languageOptions,
+  useLanguage,
+  type Language,
+} from "@/components/LanguageProvider";
 
 export function StartPortal() {
+  const { language, setLanguage, t } = useLanguage();
   const [isActive, setIsActive] = useState(false);
   const [greetingIndex, setGreetingIndex] = useState(0);
   const [rotation, setRotation] = useState(0);
@@ -30,11 +26,11 @@ export function StartPortal() {
     }
 
     const id = window.setInterval(() => {
-      setGreetingIndex((current) => (current + 1) % greetings.length);
+      setGreetingIndex((current) => (current + 1) % t.start.greetings.length);
     }, 1300);
 
     return () => window.clearInterval(id);
-  }, [isActive]);
+  }, [isActive, t.start.greetings.length]);
 
   useEffect(() => {
     phaseRef.current = isActive ? "burst" : "leaving";
@@ -118,13 +114,36 @@ export function StartPortal() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(11,95,255,0.28),transparent_32%),radial-gradient(circle_at_65%_65%,rgba(249,168,212,0.16),transparent_26%),linear-gradient(180deg,#030712_0%,#07111f_48%,#020617_100%)]" />
       <div className="absolute left-1/2 top-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 bg-court-blue/5 blur-3xl" />
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-court-blue to-transparent" />
+      <div className="absolute right-5 top-5 z-20 flex rounded-md border border-white/10 bg-white/[0.06] p-1 shadow-[0_18px_55px_rgba(0,0,0,0.28)] backdrop-blur">
+        {languageOptions.map((option) => {
+          const isActiveLanguage = language === option.code;
+
+          return (
+            <button
+              key={option.code}
+              type="button"
+              onClick={() => setLanguage(option.code as Language)}
+              className={`rounded px-3 py-2 text-xs font-bold transition ${
+                isActiveLanguage
+                  ? "bg-court-blue text-white shadow-[0_0_24px_rgba(11,95,255,0.35)]"
+                  : "text-slate-300 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
 
       <div className="relative z-10 flex w-full max-w-5xl flex-col items-center text-center">
         <p className="rounded-md border border-court-blue/35 bg-court-blue/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-sky-200">
-          PingPig Lab
+          {t.start.eyebrow}
         </p>
-        <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-          Table Tennis Vision & Community
+        <h1
+          className="font-xingkai ink-title mt-6 max-w-4xl text-5xl leading-none tracking-normal sm:text-7xl lg:text-8xl"
+          data-text={t.start.title}
+        >
+          {t.start.title}
         </h1>
 
         <button
@@ -135,7 +154,7 @@ export function StartPortal() {
           onFocus={() => setIsActive(true)}
           onBlur={() => setIsActive(false)}
           className="group relative mt-14 flex flex-col items-center outline-none"
-          aria-label="Enter PingPig Lab sections"
+          aria-label={t.start.enterLabel}
         >
           <span className="absolute top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-court-blue/0 blur-2xl transition duration-500 group-hover:bg-court-blue/25 group-focus-visible:bg-court-blue/25" />
           <span className="ping-ripple absolute top-1/2 h-64 w-64 -translate-y-1/2 rounded-full border border-sky-300/0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100" />
@@ -150,10 +169,13 @@ export function StartPortal() {
             <span className="absolute left-8 top-8 h-16 w-16 rounded-full bg-white/80 blur-xl" />
             <span className="absolute inset-6 rounded-full border border-slate-300/60" />
             <span className="absolute h-[78%] w-px rotate-[24deg] rounded-full bg-slate-300/70" />
-            <span className="relative grid h-28 w-28 place-items-center rounded-full bg-white/85 shadow-[0_12px_34px_rgba(15,23,42,0.22)] sm:h-32 sm:w-32">
+            <span
+              className="relative grid h-28 w-28 place-items-center rounded-full bg-white/85 shadow-[0_12px_34px_rgba(15,23,42,0.22)] sm:h-32 sm:w-32"
+              aria-label={t.hero.brandAlt}
+            >
               <Image
                 src="/mascots/pig-blandmark.png"
-                alt="PingPig company IP logo"
+                alt={t.hero.brandAlt}
                 width={140}
                 height={140}
                 className="h-24 w-24 object-contain sm:h-28 sm:w-28"
@@ -167,7 +189,7 @@ export function StartPortal() {
               isActive ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
             }`}
           >
-            {greetings[greetingIndex]}
+            {t.start.greetings[greetingIndex] ?? t.start.greetings[0]}
           </span>
         </button>
       </div>

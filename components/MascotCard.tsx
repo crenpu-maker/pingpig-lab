@@ -19,7 +19,11 @@ export function MascotCard({
 
   return (
     <aside className="rounded-lg border border-white/10 bg-white/[0.06] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.32)] backdrop-blur">
-      <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
+      <div
+        className={`flex flex-col items-center justify-center gap-4 text-center ${
+          title || description ? "sm:flex-row sm:text-left" : ""
+        }`}
+      >
         <div
           className={`relative flex shrink-0 items-center justify-center rounded-lg border border-white/10 ${
             imageSrc ? "h-44 w-44" : "h-20 w-20"
@@ -49,10 +53,16 @@ export function MascotCard({
             <RaisedHoofPigIcon />
           )}
         </div>
-        <div>
-          <h3 className="font-bold text-white">{title}</h3>
-          <p className="mt-1 text-sm leading-6 text-slate-400">{description}</p>
-        </div>
+        {title || description ? (
+          <div>
+            {title ? <h3 className="font-bold text-white">{title}</h3> : null}
+            {description ? (
+              <p className="mt-1 text-sm leading-6 text-slate-400">
+                {description}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </aside>
   );

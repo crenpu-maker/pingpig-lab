@@ -1,14 +1,18 @@
-const tactics = ["发球抢攻", "正手斜线", "反手直线", "侧旋发球"];
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function VisionPreview() {
+  const { t } = useLanguage();
+
   return (
     <section className="grid gap-6 lg:grid-cols-[260px_1fr]">
       <div className="rounded-lg border border-white/10 bg-white/[0.06] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.3)] backdrop-blur">
         <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-sky-300">
-          Tactical Presets
+          {t.tactics.previewEyebrow}
         </h2>
         <div className="mt-5 grid gap-3">
-          {tactics.map((tactic) => (
+          {t.tactics.presets.map((tactic) => (
             <button
               key={tactic}
               type="button"
@@ -27,10 +31,10 @@ export function VisionPreview() {
           <div className="absolute h-48 w-72 rounded-md border-2 border-white/40 shadow-[0_0_50px_rgba(56,189,248,0.22)] sm:h-60 sm:w-[32rem]" />
           <div className="relative z-10 rounded-md border border-white/20 bg-black/25 px-6 py-5 text-center backdrop-blur">
             <p className="text-xl font-black text-white sm:text-2xl">
-              3D Table Preview Coming Soon
+              {t.tactics.previewComingSoon}
             </p>
             <p className="mt-2 text-sm text-slate-300">
-              Reserved area for future Three.js or React Three Fiber integration.
+              {t.tactics.previewDescription}
             </p>
           </div>
         </div>

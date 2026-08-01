@@ -3,18 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/vision", label: "Vision" },
-  { href: "/forum", label: "Forum" },
-  { href: "/about", label: "About" },
-];
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function Navbar() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const [showHomeNav, setShowHomeNav] = useState(false);
   const isHome = pathname === "/";
+  const navItems = [
+    { href: "/", label: t.nav.home },
+    { href: "/vision", label: t.nav.tactics },
+    { href: "/forum", label: t.nav.forum },
+    { href: "/about", label: t.nav.about },
+  ];
 
   useEffect(() => {
     if (!isHome) {
@@ -54,11 +55,11 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between lg:px-8">
         <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-md bg-court-blue text-sm font-black text-white shadow-[0_0_30px_rgba(11,95,255,0.45)]">
-            PP
+          <span className="flex h-10 min-w-14 items-center justify-center rounded-md border border-sky-300/45 bg-court-blue px-2 text-sm font-black tracking-[0.08em] text-white shadow-[0_0_30px_rgba(11,95,255,0.45)]">
+            {t.start.title}
           </span>
-          <span className="text-lg font-bold tracking-tight text-white">
-            PingPig Lab
+          <span className="text-xl font-black tracking-[0.08em] text-white drop-shadow-[0_0_16px_rgba(125,211,252,0.28)]">
+            {t.start.title}
           </span>
         </Link>
 
